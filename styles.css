@@ -86,6 +86,7 @@ p {
     background: #fff;
     color: var(--color-primary);
     font-weight: bold;
+    appearance: textfield;
     -moz-appearance: textfield;
 }
 
