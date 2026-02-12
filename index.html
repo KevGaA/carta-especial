@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Corazón es Tuyo</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
+        integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=EB+Garamond:ital,wght@0,400;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <button id="toggleDarkMode" class="floating-button">
+        <i class="ri-sun-line"></i>
+    </button>
+
+    <div class="container-general">
+        
+        <section class="section active" id="inicio">
+            <h1>Mi Corazón es Tuyo ❤️</h1>
+            <p>Desde que llegaste a mi vida, todo tiene más color. ¿Me permites compartir algo especial contigo?</p>
+            <button class="btn" onclick="showSection('declaracion')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#ffffff"
+                    fill="none">
+                    <path d="M9.00005 6C9.00005 6 15 10.4189 15 12C15 13.5812 9 18 9 18" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg> Siguiente
+            </button>
+        </section>
+
+        <section class="section" id="declaracion">
+            <h1>¿Quieres ser mi San Valentín?</h1>
+            <p>Quiero seguir compartiendo contigo cada risa, cada momento y cada latido de mi corazón. 
+                ¿Aceptas ser mi compañera en esta aventura llamada amor?</p>
+            <div class="button-container">
+                <button class="btn" id="siBtn">¡Sí! 💖</button>
+                <button class="btn" id="btnNo">No! 😢</button>
+            </div>
+        </section>
+
+        <section class="section" id="aceptacion">
+            <audio id="florAudio" src="assets/god.mp3"></audio>
+
+            <div class="carta-container">
+                <div class="carta">
+                    <p class="texto">Mi querida <span class="nombre">bebé</span>,</p>
+                    
+                    <p class="texto">Desde aquel día en que nuestros caminos se cruzaron, cada momento contigo ha sido una página en el libro más maravilloso que he podido escribir...</p>
+                    
+                    <p class="texto">Recuerdo la primera vez que te vi, con esa sonrisa que iluminó incluso los rincones más oscuros de mi corazón. El tiempo pareció detenerse, y supe que nada volvería a ser igual.</p>
+                    
+                    <p class="texto">Nuestras largas conversaciones, esas risas que compartimos por tonterías, y hasta nuestros silencios cómplices... cada instante ha sido un regalo que atesoro aquí, en este corazón que late por ti.</p>
+                    
+                    <p class="texto">Gracias por decir que sí y hacerme la persona más feliz del mundo. Te amo infinitamente.</p>
+                    
+                    <div class="texto corazon" style="text-align: center;">❤️</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+/* --- ESTILOS GENERALES (BASE) --- */
+:root {
+    --color-primary: #e91e63;
+    --color-secondary: #ff8fa3;
+    --color-background: #ffffff;
+    --color-text: #e91e63;
+    --color-text-light: #fff;
+    --card-bg: #fff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode {
+    --color-primary: #007796;
+    --color-secondary: #00b3ce;
+    --color-background: #00283e;
+    --color-text: #ffffff;
+    --card-bg: #004a66;
+    --shadow: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    transition: background-color 0.3s, color 0.3s;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Ocultar scrollbar para estética */
+::-webkit-scrollbar { width: 0; }
+
+/* --- SECCIONES (IMPORTANTE PARA LA TRANSICIÓN) --- */
+.section {
+    display: none;      /* Oculto por defecto */
+    min-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    opacity: 0;         /* Invisible para el fade */
+    transition: opacity 0.8s ease-in-out; /* Transición suave de opacidad */
+}
+
+.section.active {
+    display: flex;      /* Activamos layout */
+    opacity: 1;         /* Hacemos visible */
+}
+
+/* Títulos y textos generales (Pantallas 1 y 2) */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+    font-family: 'Great Vibes', cursive;
+}
+
+p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 1rem auto;
+}
+
+/* --- BOTONES --- */
+.btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    color: var(--color-text-light);
+    background-color: var(--color-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 10px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background-color: var(--color-secondary);
+}
+
+.button-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* Botón flotante modo oscuro */
+.floating-button {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    background: var(--color-primary);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px var(--shadow);
+    z-index: 1000;
+}
+
+/* Botón No (Escurridizo) */
+#btnNo {
+    transition: all 0.3s;
+    position: relative;
+    z-index: 100;
+}
+
+
+/* ==========================================================================
+   ESTILOS DE LA CARTA NUEVA (VINTAGE) - Solo para #aceptacion
+   ========================================================================== */
+
+#aceptacion {
+    /* Fondo específico para la carta final */
+    background: #f5e6e6 url('https://www.toptal.com/designers/subtlepatterns/patterns/vintage-concrete.png');
+    font-family: 'EB Garamond', serif;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23ff3366" d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg>'), auto;
+    color: initial; /* Reseteamos color para que no afecte el dark mode global */
+}
+
+/* Contenedor inclinado */
+.carta-container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    padding: 40px;
+    margin: 2rem;
+    background: #fff5e6;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.15);
+    transform: rotate(-1deg);
+    animation: aparecer 2s ease-out;
+}
+
+/* El papel de la carta */
+.carta {
+    position: relative;
+    padding: 40px;
+    background: url('https://www.toptal.com/designers/subtlepatterns/patterns/old-map.png');
+    border: 3px solid #e6d0c4;
+    opacity: 0;
+    animation: revelar 3s forwards;
+    animation-delay: 0.5s;
+}
+
+/* Textos de la carta */
+.carta .texto {
+    font-family: 'EB Garamond', serif; 
+    font-size: 1.4rem;
+    color: #5a3e36;
+    line-height: 1.8;
+    text-align: justify;
+    margin: 25px 0;
+    opacity: 0; /* Invisibles al inicio */
+    transform: translateY(20px);
+    animation: fadeInTexto 1.5s ease-in forwards;
+}
+
+/* Delays para aparición secuencial */
+.texto:nth-child(1) { animation-delay: 1s; }
+.texto:nth-child(2) { animation-delay: 2.5s; }
+.texto:nth-child(3) { animation-delay: 4s; }
+.texto:nth-child(4) { animation-delay: 5.5s; }
+.texto:nth-child(5) { animation-delay: 7s; }
+.corazon { animation-delay: 8.5s; }
+
+.nombre {
+    font-family: 'Dancing Script', cursive;
+    color: #ff3366;
+    font-weight: bold;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.corazon {
+    font-size: 3rem;
+    animation: latido 1.5s infinite, fadeInTexto 1.5s ease-in forwards;
+    margin: 20px 0;
+    color: #ff3366;
+}
+
+/* Animaciones exclusivas de la carta */
+@keyframes aparecer {
+    to { opacity: 1; }
+}
+
+@keyframes revelar {
+    0% { clip-path: inset(0 100% 0 0); }
+    100% { clip-path: inset(0); opacity: 1; }
+}
+
+@keyframes latido {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeInTexto {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- CORAZONES FLOTANTES DE FONDO --- */
+.heart {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-primary);
+    transform: rotate(45deg);
+    opacity: 0;
+    animation: floatHearts 5s infinite ease-in;
+    pointer-events: none;
+    z-index: -1;
+    bottom: -50px;
+}
+.heart::before, .heart::after {
+    content: ''; position: absolute; width: 30px; height: 30px; border-radius: 50%; background-color: var(--color-primary);
+}
+.heart::before { left: 0; top: -15px; }
+.heart::after { top: 0; left: 15px; }
+
+@keyframes floatHearts {
+    0% { transform: translateY(0) rotate(45deg); opacity: 0; }
+    20% { opacity: 0.8; }
+    100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .carta-container { width: 95%; padding: 20px; margin: 10px auto; }
+    .carta { padding: 15px; }
+    .carta .texto { font-size: 1.1rem; }
+}
