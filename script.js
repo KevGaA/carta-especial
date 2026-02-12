@@ -5,27 +5,87 @@ document.addEventListener('DOMContentLoaded', () => {
     const noBtn = document.getElementById('btnNo');
     const toggleDarkModeButton = document.getElementById("toggleDarkMode");
     const body = document.body;
+    
+    // Variables para lectura interactiva
+    const carta = document.querySelector('.carta');
+    let indiceParrafo = 0; // Controla qué párrafo toca mostrar
 
-    // --- BOTÓN SÍ (Aceptación) ---
+    // --- LÓGICA DEL CANDADO ---
+    const inputs = document.querySelectorAll('.code-input');
+    const unlockBtn = document.getElementById('unlockBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    const PASSWORD = '120224'; // <--- CONTRASEÑA SOLICITADA
+
+    inputs.forEach((input, index) => {
+        // Al escribir
+        input.addEventListener('input', (e) => {
+            if (e.target.value.length > 1) {
+                e.target.value = e.target.value.slice(0, 1);
+            }
+            if (e.target.value.length === 1) {
+                if (index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            }
+        });
+
+        // Al borrar
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && e.target.value === '') {
+                if (index > 0) {
+                    inputs[index - 1].focus();
+                }
+            }
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    });
+
+    if (unlockBtn) {
+        unlockBtn.addEventListener('click', checkPassword);
+    }
+
+    function checkPassword() {
+        let code = '';
+        inputs.forEach(input => code += input.value);
+
+        if (code === PASSWORD) {
+            Swal.fire({
+                title: '¡Clave Correcta! 🔓',
+                text: 'Bienvenida mi amor...',
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false
+            }).then(() => {
+                showSection('inicio');
+            });
+        } else {
+            const container = document.querySelector('.lock-container');
+            container.classList.add('shake');
+            errorMsg.style.opacity = '1';
+            setTimeout(() => {
+                container.classList.remove('shake');
+            }, 500);
+        }
+    }
+
+    // --- BOTÓN SÍ ---
     if (siBtn) {
         siBtn.addEventListener('click', () => {
-            // 1. Lanzar Confeti
             for (let i = 0; i < 50; i++) {
                 crearConfeti();
             }
 
-            // 2. Mostrar Alerta Bonita
             Swal.fire({
                 title: '¡La mejor respuesta! 💖',
                 text: 'Este San Valentín será mágico...',
                 icon: 'success',
                 confirmButtonText: '¡Estoy lista! 🌹',
                 confirmButtonColor: '#e91e63',
-                // Adaptamos el color de fondo de la alerta según el modo
                 background: body.classList.contains('dark-mode') ? '#004a66' : '#fff',
                 color: body.classList.contains('dark-mode') ? '#fff' : '#545454'
             }).then((result) => {
-                // 3. Al cerrar la alerta, mostrar la carta
                 if (result.isConfirmed) {
                     showSection('aceptacion');
                 }
@@ -33,11 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- BOTÓN NO (Huidizo) ---
+    // --- BOTÓN NO ---
     if (noBtn) {
         noBtn.addEventListener('mouseover', moverBotonNo);
         noBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Evita clicks accidentales en móviles
+            e.preventDefault();
             moverBotonNo();
             Swal.fire({
                 title: '😢 ¿Segura?',
@@ -46,6 +106,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 confirmButtonText: 'Reconsiderar',
                 confirmButtonColor: '#ff8fa3'
             });
+        });
+    }
+
+    // --- LECTURA INTERACTIVA (TAP TO READ) ---
+    if (carta) {
+        carta.addEventListener('click', () => {
+            const parrafos = document.querySelectorAll('.carta .texto');
+            
+            // Si todavía quedan párrafos por mostrar
+            if (indiceParrafo < parrafos.length) {
+                // Mostrar el siguiente
+                parrafos[indiceParrafo].classList.add('visible');
+                
+                // Hacer scroll suave hacia el nuevo párrafo para que no se pierda
+                parrafos[indiceParrafo].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                indiceParrafo++;
+            }
         });
     }
 
@@ -62,19 +140,15 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleDarkModeButton.innerHTML = isDark ? '<i class="ri-moon-line"></i>' : '<i class="ri-sun-line"></i>';
     });
 
-    // --- INICIAR LLUVIA DE CORAZONES ---
     setInterval(createHeart, 300);
 });
 
-// --- FUNCIONES ---
+// --- FUNCIONES AUXILIARES ---
 
-// Función para cambiar de sección (CORREGIDA para evitar parpadeos)
 function showSection(sectionId) {
-    // 1. Ocultar suavemente las otras secciones
     document.querySelectorAll(".section").forEach((section) => {
         if (section.id !== sectionId) {
-            section.classList.remove("active"); // Quita opacidad
-            // Espera a que termine la transición CSS (0.8s) para ocultar
+            section.classList.remove("active");
             setTimeout(() => {
                 if (!section.classList.contains('active')) {
                     section.style.display = 'none';
@@ -83,20 +157,22 @@ function showSection(sectionId) {
         }
     });
 
-    // 2. Preparar y mostrar la nueva sección
     const target = document.getElementById(sectionId);
-    
-    // Aseguramos que sea visible en el DOM (display: flex) antes de animar opacidad
     target.style.display = 'flex';
-    
-    // Pequeño delay técnico para que el navegador aplique el display antes del fade-in
     setTimeout(() => {
         target.classList.add("active");
     }, 50);
 
-    // 3. Lógica específica de la carta final
     if (sectionId === 'aceptacion') {
         reproducirMusica();
+        // Iniciar la lectura automática del primer párrafo tras 1.5s
+        setTimeout(() => {
+            const primerParrafo = document.querySelector('.carta .texto');
+            if (primerParrafo && !primerParrafo.classList.contains('visible')) {
+                // Simulamos un click para activar la lógica y el índice
+                document.querySelector('.carta').click();
+            }
+        }, 1500);
     }
 }
 
@@ -104,25 +180,21 @@ function reproducirMusica() {
     const audio = document.getElementById("florAudio");
     if (audio) {
         audio.volume = 0.5;
-        audio.play().catch(e => console.log("Error de reproducción automática:", e));
+        audio.play().catch(e => console.log("Error audio:", e));
     }
 }
 
 function moverBotonNo() {
     const btn = document.getElementById('btnNo');
-    // Mueve el botón a una posición aleatoria segura (restamos 100px para que no salga de pantalla)
     const width = window.innerWidth - 100;
     const height = window.innerHeight - 100;
-    
     const newX = Math.random() * width;
     const newY = Math.random() * height;
-
     btn.style.position = "fixed";
     btn.style.left = newX + "px";
     btn.style.top = newY + "px";
 }
 
-// Corazones de fondo
 function createHeart() {
     const heart = document.createElement('div');
     heart.classList.add('heart');
@@ -133,7 +205,6 @@ function createHeart() {
     setTimeout(() => heart.remove(), 5000);
 }
 
-// Confeti de colores
 function crearConfeti() {
     const confeti = document.createElement('div');
     confeti.style.position = 'fixed';
@@ -149,7 +220,6 @@ function crearConfeti() {
     setTimeout(() => confeti.remove(), 5000);
 }
 
-// Estilos dinámicos para el confeti
 const style = document.createElement('style');
 style.textContent = `
     @keyframes caida {

@@ -22,10 +22,31 @@
     </button>
 
     <div class="container-general">
+
+        <section class="section active" id="lockScreen">
+            <h1 style="font-family: 'Great Vibes', cursive; font-size: 3rem; margin-bottom: 10px;">Candado de Amor 🔒</h1>
+            <p>Para abrir mi corazón, responde:</p>
+            <p style="font-weight: bold; font-size: 1.2rem; color: var(--color-primary);">¿Cuándo fue nuestro primer beso?</p>
+            
+            <div class="lock-container">
+                <input type="number" class="code-input" placeholder="0" inputmode="numeric">
+                <input type="number" class="code-input" placeholder="0" inputmode="numeric">
+                <input type="number" class="code-input" placeholder="0" inputmode="numeric">
+                <input type="number" class="code-input" placeholder="0" inputmode="numeric">
+                <input type="number" class="code-input" placeholder="0" inputmode="numeric">
+                <input type="number" class="code-input" placeholder="0" inputmode="numeric">
+            </div>
+            
+            <p class="hint-text" style="font-size: 0.9rem; opacity: 0.7;">(Formato: DDMMAA)</p>
+            
+            <button class="btn" id="unlockBtn">Desbloquear 🔓</button>
+            <p id="errorMsg" style="color: #e91e63; opacity: 0; transition: opacity 0.3s; margin-top: 10px; font-weight: bold;">Fecha incorrecta 😢</p>
+        </section>
         
-        <section class="section active" id="inicio">
+        <section class="section" id="inicio">
             <h1>Mi Corazón es Tuyo ❤️</h1>
-            <p>Desde que llegaste a mi vida todo cambió, todo tiene más color. ¿Me permites compartir algo especial contigo?</p>
+            <p>Desde que llegaste a mi vida todo cambió, todo tiene más color.</p> 
+            <p>¿Me permites compartir algo especial contigo?</p>
             <button class="btn" onclick="showSection('declaracion')">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#ffffff"
                     fill="none">
@@ -37,8 +58,10 @@
 
         <section class="section" id="declaracion">
             <h1>¿Quieres ser mi San Valentín?</h1>
-            <p>Quiero seguir compartiendo contigo cada risa, cada momento y cada latido de mi corazón. 
-                ¿Aceptas ser mi compañera en esta aventura llamada amor?</p>
+            <p> Quiero caminar a tu lado en cada amanecer, abrazarte en cada atardecer y perderme contigo en todos los sueños que aún nos faltan por vivir. Recuerda que debemos ir a NYC aún. <br> 
+                Quiero que cada risa sea nuestra, que cada momento tenga tu nombre y que mi corazón siga latiendo al ritmo del tuyo, hoy y siempre. 💖
+            </p>
+            <p style="font-weight: bold;">¿Aceptas seguir siendo mi compañera en esta aventura llamada amor?</p>
             <div class="button-container">
                 <button class="btn" id="siBtn">¡Sí! 💖</button>
                 <button class="btn" id="btnNo">No! 😢</button>
@@ -52,15 +75,23 @@
                 <div class="carta">
                     <p class="texto">Mi querida <span class="nombre">bebé</span>,</p>
                     
-                    <p class="texto">Desde aquel día en que nuestros caminos se cruzaron, cada momento contigo ha sido una página en el libro más maravilloso que he podido escribir...</p>
+                    <p class="texto">Desde aquel día en que nuestros caminos se cruzaron, cada momento contigo se convirtió en una página del libro más maravilloso que he tenido el privilegio de escribir...</p>
                     
-                    <p class="texto">Recuerdo la primera vez que te vi, con esa sonrisa que iluminó incluso los rincones más oscuros de mi corazón. El tiempo pareció detenerse, y supe que nada volvería a ser igual.</p>
+                    <p class="texto">Recuerdo la primera vez que te vi, con esa sonrisa que iluminó incluso los rincones más oscuros de mi corazón. El tiempo pareció detenerse, y en ese instante supe que nada volvería a ser igual.</p>
                     
-                    <p class="texto">Nuestras largas conversaciones, esas risas que compartimos por tonterías, y hasta nuestros silencios cómplices... cada instante ha sido un regalo que atesoro aquí, en este corazón que late por ti.</p>
+                    <p class="texto">Nuestras largas conversaciones, esas risas por cosas tontas que solo nosotros entendemos, incluso nuestros silencios cómplices… todo contigo tiene un significado especial. Esas cenas que para cualquiera podrían ser simples, para mí son mágicas, porque son contigo.</p>
+                    
+                    <p class="texto">Y tus mañas… aunque a veces finja que no me gustan, la verdad es que me encantan, porque te hacen ser tú, auténtica y única. Cada instante a tu lado ha sido un regalo que guardo aquí, en este corazón que late solo por ti.</p>
                     
                     <p class="texto">Gracias por decir que sí y hacerme la persona más feliz del mundo. Te amo infinitamente.</p>
                     
+                    <p class="texto">Te amo infinitamente… como un te amo^(N+1), donde N es el amor infinito que siento por ti. Y si el amor ya era infinito, contigo siempre es un infinito más grande.</p>
+                    
+                    <p class="texto">Siempre tuyo, Kevito.</p>
+                    
                     <div class="texto corazon" style="text-align: center;">❤️</div>
+                    
+                    <div style="text-align: center; margin-top: 20px; font-size: 0.8rem; opacity: 0.5; font-family: sans-serif;">(Toca la carta para seguir leyendo)</div>
                 </div>
             </div>
         </section>
