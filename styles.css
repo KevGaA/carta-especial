@@ -264,7 +264,7 @@ p {
     width: 30px;
     height: 30px;
     background-color: var(--color-primary);
-    transform: rotate(45deg);
+    
     opacity: 0;
     animation: floatHearts 5s infinite ease-in;
     pointer-events: none;
@@ -278,9 +278,9 @@ p {
 .heart::after { top: 0; left: 15px; }
 
 @keyframes floatHearts {
-    0% { transform: translateY(0) rotate(45deg); opacity: 0; }
+    0% { transform: translateY(0) rotate(380deg); opacity: 0; }
     20% { opacity: 0.8; }
-    100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+    100% { transform: translateY(-100vh) rotate(1deg); opacity: 0; }
 }
 
 @media (max-width: 768px) {
